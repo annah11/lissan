@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-
-export default function Sidebar({ analysis }: { analysis: any }) {
+import { Analysis } from "@/types/index";
+export default function Sidebar({ analysis }: { analysis: Analysis }) {
   return (
     <div className="space-y-4">
       <Card>

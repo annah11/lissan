@@ -15,12 +15,13 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Image from "next/image";
+import { Analysis, Issue } from "@/types/index";
 
 export default function GrammarCoachPage() {
   const [activeTab, setActiveTab] = useState<"grammar" | "examples">("grammar");
   const [text, setText] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisResults, setAnalysisResults] = useState<any>(null);
+  const [analysisResults, setAnalysisResults] = useState<Analysis | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleDownload = () => {
@@ -41,8 +42,8 @@ export default function GrammarCoachPage() {
     navigator.clipboard.writeText(analysisResults.improvedText);
   };
 
-  const handleApplyFix = (issue: any) => {
-    const regex = new RegExp(issue.original, "gi");
+  const handleApplyFix = (issue: Issue) => {
+    const regex = new RegExp(issue.original ?? "", "gi");
     const newText = text.replace(regex, issue.suggestion);
     setText(newText);
     setAnalysisResults(null);
@@ -375,7 +376,7 @@ export default function GrammarCoachPage() {
                         </span>
                       </div>
                       <ul className="space-y-2">
-                        {analysisResults.writingTips.map(
+                        {analysisResults.writingTips?.map(
                           (tip: string, idx: number) => (
                             <li
                               key={idx}
@@ -475,11 +476,11 @@ export default function GrammarCoachPage() {
                     <div className="w-80 h-80 bg-white rounded-full flex items-center justify-center shadow-lg">
                       <div className="relative h-64 w-64 md:h-80 md:w-80 mx-auto flex items-center justify-center">
                         <img
-                            src="/videos/sleepingmascot.gif" // Path to your GIF file
-                            alt="LissanAI Mascot Animation" // Accessible alt text for the image
-                            className="absolute inset-0 w-full h-full object-contain" // Keep consistent styling
+                          src="/videos/sleepingmascot.gif" // Path to your GIF file
+                          alt="LissanAI Mascot Animation" // Accessible alt text for the image
+                          className="absolute inset-0 w-full h-full object-contain" // Keep consistent styling
                         />
-                    </div>
+                      </div>
                     </div>
                     <div className="flex items-center text-xs text-black bg-[#D9E0ED] rounded-full mt-2 px-3 py-1 font-medium shadow">
                       🗣️ Write your text

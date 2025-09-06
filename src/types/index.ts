@@ -8,15 +8,15 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
-  provider: string; 
+  provider: string;
   created_at: string;
   updated_at: string;
-  settings?: Record<string, any>; 
+  settings?: Record<string, any>;
 }
 
 /**
  * Represents the entire successful authentication response from backend.
- * 
+ *
  */
 export interface IAuthResponse {
   access_token: string;
@@ -25,18 +25,33 @@ export interface IAuthResponse {
   user: IUser;
 }
 
-export type TEmailProcessType = 'GENERATE' | 'EDIT';
-
+export type TEmailProcessType = "GENERATE" | "EDIT";
 
 export interface IEmailProcessRequest {
   prompt: string;
   type: TEmailProcessType;
-  template_type?: string; 
-  tone?: string;         
+  template_type?: string;
+  tone?: string;
 }
 
 export interface IEmailProcessResponse {
   generated_email: string;
   subject: string;
   body: string;
+}
+export interface Issue {
+  type: string;
+  message: string;
+  suggestion: string;
+  original?: string;
+}
+
+export interface Analysis {
+  score: number;
+  issues: Issue[];
+  issuesFound: number;
+  wordCount: number;
+  readability: string;
+  improvedText?: string;
+  writingTips?: string[];
 }

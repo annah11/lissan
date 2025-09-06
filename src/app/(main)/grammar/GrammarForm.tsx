@@ -4,11 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { checkGrammar } from "@/lib/grammarApi";
+import { Analysis } from "@/types/index";
+``;
 
 export default function GrammarForm({
   onResult,
 }: {
-  onResult: (data: any) => void;
+  onResult: (data: Analysis) => void;
 }) {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);

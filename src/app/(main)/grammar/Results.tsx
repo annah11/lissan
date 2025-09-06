@@ -1,17 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Analysis } from "@/types/index";
 
-export default function Results({ analysis }: { analysis: any }) {
+export default function Results({ analysis }: { analysis: Analysis }) {
   const { issues, improvedText } = analysis;
 
   // Copy to clipboard
   const handleCopy = () => {
-    navigator.clipboard.writeText(improvedText);
+    navigator.clipboard.writeText(improvedText ?? "");
   };
 
   // Download as text file
   const handleDownload = () => {
-    const blob = new Blob([improvedText], { type: "text/plain" });
+    const blob = new Blob([improvedText ?? ""], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
